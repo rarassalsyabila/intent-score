@@ -52,10 +52,6 @@ public class MatchActivity extends AppCompatActivity {
             AvahomeImage.setImageBitmap(bmp);
             AvaawayImage.setImageBitmap(bmp1);
         }
-        //TODO
-        //1.Menampilkan detail match sesuai data dari main activity
-        //2.Tombol add score menambahkan satu angka dari angka 0, setiap kali di tekan
-        //3.Tombol Cek Result menghitung pemenang dari kedua tim dan mengirim nama pemenang ke ResultActivity, jika seri di kirim text "Draw"
     }
 
 
