@@ -36,6 +36,8 @@ public class MatchActivity extends AppCompatActivity {
 
         score1 = 0;
         score2 = 0;
+        scoreHome.setText("0");
+        scoreAway.setText("0");
 
         Bundle extrras = getIntent().getExtras();
         if (extrras != null){

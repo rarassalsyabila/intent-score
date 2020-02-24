@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText AwayInput;
     private ImageView AvahomeImage;
     private ImageView AvaawayImage;
+    private Bitmap imhome;
+    private Bitmap imaway;
 
     private static final String TAG = MainActivity.class.getCanonicalName();
     private static final int GALLERY_REQUEST_CODE = 1;
@@ -58,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
             if (data != null) {
                 try {
                     Uri imageUri = data.getData();
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-                    AvahomeImage.setImageBitmap(bitmap);
+                    imhome = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                    AvahomeImage.setImageBitmap(imhome);
                 } catch (IOException e) {
                     Toast.makeText(this, "Can't load image", Toast.LENGTH_SHORT).show();
                     Log.e(TAG, e.getMessage());
@@ -70,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
             if (data != null) {
                 try {
                     Uri imageUri = data.getData();
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-                    AvaawayImage.setImageBitmap(bitmap);
+                    imaway = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                    AvaawayImage.setImageBitmap(imaway);
                 } catch (IOException e) {
                     Toast.makeText(this, "Can't load image", Toast.LENGTH_SHORT).show();
                     Log.e(TAG, e.getMessage());
@@ -90,12 +92,18 @@ public class MainActivity extends AppCompatActivity {
         else if (away.length() == 0){
             AwayInput.setError("Fill the team name (AWAY)!");
         }
+        else if (imhome == null){
+            Toast.makeText(this, "Choose the logo first(HOME)!", Toast.LENGTH_SHORT).show();
+        }
+        else if (imaway == null){
+            Toast.makeText(this, "Choose the logo first(AWAY)!", Toast.LENGTH_SHORT).show();
+        }
         else{
             Intent intent = new Intent(this, MatchActivity.class);
             AvahomeImage.buildDrawingCache();
             AvaawayImage.buildDrawingCache();
-            Bitmap imhome = AvahomeImage.getDrawingCache();
-            Bitmap imaway = AvaawayImage.getDrawingCache();
+            imhome = AvahomeImage.getDrawingCache();
+            imaway = AvaawayImage.getDrawingCache();
             Bundle extras = new Bundle();
             extras.putParcelable(AVAHOME_KEY, imhome);
             extras.putParcelable(AVAAWAY_KEY, imaway);
